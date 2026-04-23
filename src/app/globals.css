@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0b192c;
+  --foreground: #ffffff;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-teal-accent {
+  color: #3be4bd;
+}
+
+.bg-teal-accent {
+  background-color: #3be4bd;
+}
+
+@keyframes xentroSectionRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes xentroBubbleFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+@keyframes xentroIconSwap {
+  0% {
+    opacity: 0;
+    transform: scale(0.68) rotate(-20deg);
+    filter: blur(7px);
+  }
+
+  58% {
+    opacity: 1;
+    transform: scale(1.06) rotate(3deg);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes xentroIconBlob {
+  0% {
+    opacity: 0;
+    transform: scale(0.64);
+    border-radius: 32% 68% 61% 39% / 44% 39% 61% 56%;
+  }
+
+  55% {
+    opacity: 0.78;
+    transform: scale(1.06);
+    border-radius: 63% 37% 40% 60% / 37% 59% 41% 63%;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+    border-radius: 40% 60% 58% 42% / 59% 42% 58% 41%;
+  }
+}
+
+.xentro-section-rise {
+  animation: xentroSectionRise 700ms ease-out both;
+}
+
+.xentro-bubble-float {
+  animation-name: xentroBubbleFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.xentro-icon-swap {
+  animation: xentroIconSwap 560ms cubic-bezier(0.2, 0.84, 0.25, 1) both;
+}
+
+.xentro-icon-blob {
+  animation: xentroIconBlob 620ms cubic-bezier(0.24, 0.78, 0.26, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xentro-section-rise,
+  .xentro-bubble-float,
+  .xentro-icon-swap,
+  .xentro-icon-blob {
+    animation: none !important;
+  }
 }
