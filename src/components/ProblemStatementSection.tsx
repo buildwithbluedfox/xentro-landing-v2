@@ -104,36 +104,48 @@ const bubbles: Bubble[] = [
 
 export default function ProblemStatementSection() {
   return (
-    <section className="w-full py-20 md:py-24">
-      <div className="xentro-section-rise w-full border-y border-[#d8dfef] bg-[linear-gradient(140deg,#f7f9fd_0%,#eff3fb_55%,#edf2fa_100%)]">
+    <section className="xentro-section-rise relative w-full overflow-hidden bg-[#060b14] py-20 md:py-24">
+      <div className="w-full border-y border-white/10 bg-[#060b14]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 15% 18%, rgba(92,123,252,0.18), rgba(92,123,252,0) 34%), radial-gradient(circle at 84% 18%, rgba(110,215,255,0.16), rgba(110,215,255,0) 30%), linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0) 42%)",
+          }}
+        />
         <div className="mx-auto grid max-w-[1240px] items-center gap-14 px-6 py-14 sm:px-10 md:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:px-16">
           <div className="max-w-[62ch]">
-            <p className={`${headingFont.className} mb-4 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-[#63708a]`}>
-              Problem statement
+            <p className={`${headingFont.className} mb-4 text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-white/55`}>
+              Why XENTRO
             </p>
 
-            <h2 className={`${headingFont.className} mb-6 text-[2.05rem] font-semibold leading-[1.08] tracking-[-0.02em] text-[#0f1630] sm:text-[2.55rem] lg:text-[3.1rem]`}>
-              This is a heading sample
+            <h2 className={`${headingFont.className} mb-6 text-[2.05rem] font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-[2.55rem] lg:text-[3.1rem]`}>
+              One ecosystem to launch, build, and grow.
             </h2>
 
-            <p className={`${bodyFont.className} text-[1.04rem] leading-[1.85] text-[#1d2b4a]/85 sm:text-[1.15rem]`}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-              voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            <p className={`${bodyFont.className} text-[1.04rem] leading-[1.85] text-white/72 sm:text-[1.15rem]`}>
+              XENTRO helps students and early-stage founders move from idea to execution with guided
+              learning paths, mentor access, startup showcase profiles, and investor visibility in one
+              connected platform.
+            </p>
+
+            <p className={`${bodyFont.className} mt-5 text-[0.98rem] leading-[1.8] text-white/58 sm:text-[1.05rem]`}>
+              Built for India&apos;s next generation of entrepreneurs, XENTRO removes scattered tools and
+              replaces them with a focused journey that supports real progress every week.
             </p>
           </div>
 
           <div className="relative mx-auto h-[320px] w-full max-w-[500px] sm:h-[380px] lg:h-[430px]">
-            <div className="pointer-events-none absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(43,64,246,0.09)_0%,rgba(43,64,246,0)_72%)]" />
+            <div className="pointer-events-none absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(92,123,252,0.24)_0%,rgba(110,215,255,0.12)_46%,rgba(43,64,246,0)_74%)]" />
 
             {bubbles.map((bubble, index) => (
               <div
                 key={`bubble-${index}`}
-                className={`xentro-bubble-float absolute flex items-center justify-center rounded-full border shadow-[0_10px_26px_rgba(15,23,42,0.08)] backdrop-blur-sm ${
+                className={`xentro-bubble-float absolute flex items-center justify-center rounded-full border shadow-[0_14px_34px_rgba(0,0,0,0.28)] backdrop-blur-sm ${
                   bubble.highlight
-                    ? "border-[#c8d3f7] bg-white/92 text-[#2b40f6]"
-                    : "border-[#d4dbe9] bg-[#f7f9fc]/94 text-[#2f3d5a]"
+                    ? "border-[#7ed7ff]/35 bg-[#0f1728]/92 text-[#7ed7ff]"
+                    : "border-white/12 bg-white/6 text-white/78"
                 }`}
                 style={{
                   width: `${bubble.size}px`,

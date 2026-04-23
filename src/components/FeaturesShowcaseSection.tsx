@@ -142,11 +142,6 @@ const audienceContent: Record<AudienceKey, AudienceData> = {
         description: "Review traction signals and core startup metrics.",
       },
       {
-        id: "I-04",
-        title: "Direct Founder Access",
-        description: "Connect with founders without noisy intermediaries.",
-      },
-      {
         id: "I-05",
         title: "Portfolio Tracking",
         description: "Monitor portfolio founders and progress over time.",

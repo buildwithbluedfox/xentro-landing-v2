@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Digiboost | Creative Digital Agency",
-  description: "Landing page for Digiboost digital agency",
+  title: "XENTRO | Digital Entrepreneurship Ecosystem",
+  description: "Landing page for XENTRO digital entrepreneurship ecosystem",
 };
 
 export default function RootLayout({
