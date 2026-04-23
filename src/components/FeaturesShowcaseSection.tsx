@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-type AudienceKey = "mentors" | "founders" | "investors" | "institutions";
+type AudienceKey = "mentors" | "founders" | "investors";
 
 type FeatureData = {
   id: string;
@@ -22,7 +22,7 @@ type AudienceData = {
   features: FeatureData[];
 };
 
-const audienceOrder: AudienceKey[] = ["mentors", "founders", "investors", "institutions"];
+const audienceOrder: AudienceKey[] = ["mentors", "founders", "investors"];
 
 const audienceContent: Record<AudienceKey, AudienceData> = {
   mentors: {
@@ -150,51 +150,6 @@ const audienceContent: Record<AudienceKey, AudienceData> = {
         id: "I-05",
         title: "Portfolio Tracking",
         description: "Monitor portfolio founders and progress over time.",
-        className: "col-span-2",
-      },
-    ],
-  },
-  institutions: {
-    label: "Institutions",
-    logo: {
-      glowColor: "rgba(194, 246, 98, 0.34)",
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.8}
-          className="h-20 w-20 text-[#c4f06a] filter-[drop-shadow(0_0_18px_rgba(186,240,95,0.72))] sm:h-24 sm:w-24"
-        >
-          <rect x="9.2" y="2" width="5.6" height="5.6" rx="1.1" />
-          <rect x="2" y="9.2" width="5.6" height="5.6" rx="1.1" />
-          <rect x="16.4" y="9.2" width="5.6" height="5.6" rx="1.1" />
-          <rect x="9.2" y="16.4" width="5.6" height="5.6" rx="1.1" />
-          <rect x="9.2" y="9.2" width="5.6" height="5.6" rx="1.1" />
-        </svg>
-      ),
-    },
-    features: [
-      {
-        id: "S-02",
-        title: "Campus Program Stack",
-        description: "Run startup programs with consistent digital structure.",
-        className: "col-span-2",
-      },
-      {
-        id: "S-03",
-        title: "Cohort Tracking",
-        description: "Follow student startups from idea to prototype stage.",
-      },
-      {
-        id: "S-04",
-        title: "Mentor Network Layer",
-        description: "Plug in experts and investors around each cohort.",
-      },
-      {
-        id: "S-05",
-        title: "Showcase & Reporting",
-        description: "Highlight outcomes with clear institutional reporting.",
         className: "col-span-2",
       },
     ],
@@ -334,17 +289,19 @@ export default function FeaturesShowcaseSection() {
       />
 
       <div className="relative z-10 mx-auto max-w-280 px-6 sm:px-8 lg:px-10">
-        <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[0.26em] text-white/55">
-          Platform Features
-        </p>
+        <div className="mb-10 flex flex-col items-center text-center">
+          <p className="mb-3 text-[0.72rem] font-semibold uppercase tracking-[0.26em] text-white/55">
+            Platform Features
+          </p>
 
-        <h2 className="mb-3 text-[2.2rem] font-semibold leading-none text-white sm:text-[2.85rem] lg:text-[3.2rem]">
-          Engineered for Liftoff
-        </h2>
+          <h2 className="mb-3 text-[2.2rem] font-semibold leading-none text-white sm:text-[2.85rem] lg:text-[3.2rem]">
+            Engineered for Liftoff
+          </h2>
 
-        <p className="mb-9 max-w-3xl text-[0.95rem] leading-relaxed text-white/72 sm:text-[1.05rem]">
-          Pick a role to view exactly what that audience gets inside XENTRO.
-        </p>
+          <p className="max-w-xl text-[0.95rem] leading-relaxed text-white/72 sm:text-[1.05rem]">
+            Pick a role to view exactly what that audience gets inside XENTRO.
+          </p>
+        </div>
 
         <div
           className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.42fr)] lg:items-stretch"
@@ -366,7 +323,7 @@ export default function FeaturesShowcaseSection() {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+        <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
           {audienceOrder.map((audience) => {
             const isActive = audience === activeAudience;
 
