@@ -202,7 +202,7 @@ function LogoPanel({ logo, label, panelRef }: LogoPanelProps) {
   return (
     <article
       ref={panelRef}
-      className="relative aspect-square w-full overflow-hidden rounded-[1.1rem] border border-white/35 bg-[linear-gradient(160deg,rgba(28,38,58,0.88)_0%,rgba(10,15,25,0.92)_68%,rgba(5,8,14,0.95)_100%)]"
+      className="relative aspect-square w-full overflow-hidden rounded-[1.1rem] bg-[linear-gradient(160deg,rgba(28,38,58,0.88)_0%,rgba(10,15,25,0.92)_68%,rgba(5,8,14,0.95)_100%)]"
     >
       <div
         aria-hidden="true"
