@@ -215,6 +215,8 @@ type FeatureCardProps = {
   description: string;
   icon: ReactNode;
   className?: string;
+  isVisible?: boolean;
+  delayMs?: number;
 };
 
 type LogoPanelProps = {
@@ -222,12 +224,18 @@ type LogoPanelProps = {
   panelRef?: React.RefObject<HTMLElement | null>;
 };
 
-function FeatureCard({ title, description, icon, className = "" }: FeatureCardProps) {
+function FeatureCard({ title, description, icon, className = "", isVisible = true, delayMs = 0 }: FeatureCardProps) {
   const baseClass = "border-white/15 bg-[#0f1624]";
 
   return (
     <article
       className={`${baseClass} ${className} group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.1rem] border p-5 text-white transition-all duration-300 hover:border-white/40 hover:shadow-[0_18px_45px_rgba(0,0,0,0.45)] sm:p-6`}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translate3d(0, 0, 0) scale(1)" : "translate3d(0, 46px, 0) scale(0.9)",
+        transition: "transform 760ms cubic-bezier(0.18, 0.84, 0.24, 1), opacity 620ms ease-out",
+        transitionDelay: `${delayMs}ms`,
+      }}
     >
       <div
         aria-hidden="true"
@@ -301,10 +309,88 @@ function LogoPanel({ activeAudience, panelRef }: LogoPanelProps) {
 }
 
 export default function FeaturesShowcaseSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeAudience, setActiveAudience] = useState<AudienceKey>("founders");
+  const [isInView, setIsInView] = useState(false);
+  const [cardsVisible, setCardsVisible] = useState(false);
   const [logoPanelHeight, setLogoPanelHeight] = useState(0);
   const logoPanelRef = useRef<HTMLElement | null>(null);
+  const revealFrameRef = useRef<number | null>(null);
   const currentSection = audienceContent[activeAudience];
+
+  const triggerCardReveal = () => {
+    if (revealFrameRef.current !== null) {
+      window.cancelAnimationFrame(revealFrameRef.current);
+    }
+
+    revealFrameRef.current = window.requestAnimationFrame(() => {
+      setCardsVisible(true);
+      revealFrameRef.current = null;
+    });
+  };
+
+  const switchAudience = (nextAudience: AudienceKey) => {
+    setCardsVisible(false);
+    setActiveAudience(nextAudience);
+    triggerCardReveal();
+  };
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsInView(Boolean(entry?.isIntersecting));
+      },
+      {
+        threshold: 0.35,
+      },
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) {
+      setCardsVisible(false);
+      return;
+    }
+
+    setCardsVisible(false);
+    triggerCardReveal();
+
+    return () => {
+      if (revealFrameRef.current !== null) {
+        window.cancelAnimationFrame(revealFrameRef.current);
+      }
+    };
+  }, [isInView]);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const interval = window.setInterval(() => {
+      setActiveAudience((previous) => {
+        const currentIndex = audienceOrder.indexOf(previous);
+        const nextIndex = (currentIndex + 1) % audienceOrder.length;
+        const nextAudience = audienceOrder[nextIndex];
+        setCardsVisible(false);
+        triggerCardReveal();
+        return nextAudience;
+      });
+    }, 15000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [isInView]);
 
   useEffect(() => {
     const panel = logoPanelRef.current;
@@ -333,7 +419,7 @@ export default function FeaturesShowcaseSection() {
     : undefined;
 
   return (
-    <section className="relative isolate w-full overflow-hidden bg-[#030712] py-18 sm:py-24">
+    <section ref={sectionRef} className="relative isolate w-full overflow-hidden bg-[#030712] py-18 sm:py-24">
       {/* Background Grid Gradient */}
       <div
         aria-hidden="true"
@@ -372,7 +458,7 @@ export default function FeaturesShowcaseSection() {
                   <button
                     type="button"
                     key={audience}
-                    onClick={() => setActiveAudience(audience)}
+                    onClick={() => switchAudience(audience)}
                     aria-pressed={isActive}
                     className={`flex h-12 w-full items-center justify-center gap-2 rounded-full border text-[0.69rem] font-semibold uppercase tracking-[0.19em] transition-all duration-200 ${
                       isActive
@@ -396,6 +482,8 @@ export default function FeaturesShowcaseSection() {
                   description={feature.description}
                   icon={feature.icon}
                   className={feature.className}
+                  isVisible={cardsVisible}
+                  delayMs={110 + currentSection.features.findIndex((item) => item.id === feature.id) * 120}
                 />
               ))}
             </div>

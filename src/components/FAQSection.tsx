@@ -76,14 +76,33 @@ export default function FAQSection() {
                     <span className="text-[1.16rem] font-semibold tracking-[-0.01em] text-[#151a28]">
                       {item.question}
                     </span>
-                    <span className="text-[1.25rem] font-semibold text-[#2a3142]" aria-hidden="true">
-                      {isOpen ? "-" : "+"}
+                    <span className="relative h-6 w-6 text-[1.25rem] font-semibold text-[#2a3142]" aria-hidden="true">
+                      <span
+                        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+                          isOpen ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"
+                        }`}
+                      >
+                        +
+                      </span>
+                      <span
+                        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+                          isOpen ? "opacity-100 rotate-0" : "opacity-0 rotate-90"
+                        }`}
+                      >
+                        -
+                      </span>
                     </span>
                   </button>
 
-                  {isOpen && (
-                    <p className="pb-5 pr-8 text-[1rem] leading-[1.75] text-[#31384b]/90">{item.answer}</p>
-                  )}
+                  <div
+                    className={`grid overflow-hidden transition-[grid-template-rows,opacity,transform] duration-400 ease-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100 translate-y-0" : "grid-rows-[0fr] opacity-0 -translate-y-1"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="pb-5 pr-8 text-[1rem] leading-[1.75] text-[#31384b]/90">{item.answer}</p>
+                    </div>
+                  </div>
                 </article>
               );
             })}
