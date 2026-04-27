@@ -38,14 +38,14 @@ export default function HeroSection() {
         {/* ── Navbar ── */}
         <nav className="relative z-10 mb-10 md:mb-14 flex items-center justify-between pl-6 pr-6 md:pl-8 md:pr-12 lg:pl-10 lg:pr-24">
           {/* Logo — pushed further left */}
-          <div className="flex w-45 items-center gap-3 -ml-1">
+          <div className="flex w-full items-center gap-3 -ml-1 sm:w-72 lg:w-80">
             <Image
-              src="/logo-nobgcopy.webp"
+              src="/image-removebg-preview.png"
               alt="XENTRO"
-              width={180}
-              height={72}
+              width={340}
+              height={136}
               priority
-              className="h-12 w-auto"
+              className="h-18 w-auto sm:h-20 lg:h-22"
             />
           </div>
 
