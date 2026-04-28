@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const features = [
+export const ribbonFeatures = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="w-8 h-8">
@@ -140,12 +140,12 @@ export default function FeatureRibbon() {
   }, []);
 
   return (
-    <section className="w-full overflow-hidden bg-[#0f2033] pt-4 pb-3">
+    <section className="w-full  h-24 overflow-hidden bg-[#0f2033] pt-4 pb-4">
       <div ref={viewportRef} className="overflow-hidden">
         <div ref={trackRef} className="flex w-max" style={{ willChange: "transform" }}>
           {[0, 1].map((setIndex) => (
             <div key={setIndex} ref={setIndex === 0 ? firstSetRef : undefined} className="flex gap-4 pr-4">
-              {features.map((feature, i) => (
+              {ribbonFeatures.map((feature, i) => (
                 <FeatureCard key={`${feature.title}-${setIndex}-${i}`} feature={feature} />
               ))}
             </div>
@@ -156,10 +156,10 @@ export default function FeatureRibbon() {
   );
 }
 
-function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
+function FeatureCard({ feature }: { feature: (typeof ribbonFeatures)[0] }) {
   return (
-    <div className="group flex shrink-0 w-56 h-20 items-center gap-3 rounded-2xl bg-[#0f2033] px-4 cursor-default transition-all duration-300 hover:bg-[#0b2540]">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#102943] text-[#3b82f6] transition-colors duration-300 group-hover:text-[#60a5fa]">
+    <div className="group flex shrink-0 w-56 py-4 items-center gap-3 rounded-2xl bg-[#0f2033] px-4 cursor-default transition-all duration-300 hover:bg-[#0b2540]">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center text-[#3b82f6] transition-colors duration-300 group-hover:text-[#60a5fa]">
         {feature.icon}
       </div>
 

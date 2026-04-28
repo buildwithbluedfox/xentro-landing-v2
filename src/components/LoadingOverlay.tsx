@@ -69,7 +69,6 @@ export default function LoadingOverlay() {
       >
         <source src="/xentro%20loading.mp4" type="video/mp4" />
       </video>
-      <div className="pointer-events-none absolute inset-0 bg-black/30" />
     </div>
   );
 }

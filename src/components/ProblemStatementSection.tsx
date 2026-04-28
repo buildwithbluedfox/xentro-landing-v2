@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Montserrat, Open_Sans } from "next/font/google";
+import { ribbonFeatures } from "@/components/FeatureRibbon";
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -17,13 +18,13 @@ const lines = [
   "No roadmap. No mentor. No platform.",
   "The system wasn't built for you.",
   "Xentro was built for this.",
-  "Your start starts here.",
+  "Your idea. Your shot.",
   "Join Xentro.",
 ];
 
 type Bubble = {
   label: string;
-  value: string;
+  icon: ReactNode;
   angle: number;
   radius: number;
   size: number;
@@ -32,12 +33,12 @@ type Bubble = {
 };
 
 const bubbles: Bubble[] = [
-  { label: "Incubators", value: "1.5K+", angle: -120, radius: 250, size: 170, color: "#dbeafe", delay: 120 },
-  { label: "Investors", value: "2K+", angle: -20, radius: 270, size: 150, color: "#93c5fd", delay: 260 },
-  { label: "Funding", value: "₹30B+", angle: 190, radius: 220, size: 140, color: "#ebf8ff", delay: 820 },
-  { label: "Startups", value: "112K+", angle: 135, radius: 260, size: 190, color: "#bfdbfe", delay: 400 },
-  { label: "Unicorns", value: "100+", angle: 60, radius: 285, size: 180, color: "#7dd3fc", delay: 540 },
-  { label: "Cities", value: "600+", angle: 100, radius: 230, size: 175, color: "#60a5fa", delay: 680 },
+  { label: "Guided Learning", icon: ribbonFeatures[0].icon, angle: -120, radius: 250, size: 170, color: "#dbeafe", delay: 120 },
+  { label: "Mentor Connect", icon: ribbonFeatures[1].icon, angle: -20, radius: 270, size: 150, color: "#93c5fd", delay: 260 },
+  { label: "Startup Showcase", icon: ribbonFeatures[2].icon, angle: 190, radius: 220, size: 140, color: "#ebf8ff", delay: 820 },
+  { label: "Events & Cohorts", icon: ribbonFeatures[3].icon, angle: 135, radius: 260, size: 190, color: "#bfdbfe", delay: 400 },
+  { label: "Community Spaces", icon: ribbonFeatures[4].icon, angle: 60, radius: 285, size: 180, color: "#7dd3fc", delay: 540 },
+  { label: "Progress Tools", icon: ribbonFeatures[5].icon, angle: 100, radius: 230, size: 175, color: "#60a5fa", delay: 680 },
 ];
 
 export default function ProblemStatementSection() {
@@ -138,7 +139,7 @@ export default function ProblemStatementSection() {
           {bubbles.map((bubble, index) => (
             <div
               key={bubble.label}
-              className="absolute rounded-full border border-white/80 shadow-[0_32px_90px_rgba(15,46,114,0.14)] flex items-center justify-center text-center"
+              className="absolute flex items-center justify-center text-center"
               style={{
                 width: `${bubble.size}px`,
                 height: `${bubble.size}px`,
@@ -149,15 +150,14 @@ export default function ProblemStatementSection() {
                   ? `translate(-50%, -50%) rotate(${bubble.angle}deg) translateX(${bubble.radius}px) scale(1)`
                   : "translate(-50%, -50%) scale(0.24)",
                 transition: `opacity 360ms ease ${bubble.delay}ms, transform 900ms cubic-bezier(0.22, 0.8, 0.32, 1) ${bubble.delay}ms`,
-                backgroundColor: bubble.color,
               }}
             >
               <div className="flex items-center justify-center px-4" style={{ transform: `rotate(${-bubble.angle}deg)` }}>
-                <div className="xentro-spin-counter flex flex-col items-center justify-center text-center">
-                  <span className={`${bodyFont.className} text-[1.2rem] font-bold tracking-[-0.02em] text-slate-950`}>{bubble.value}</span>
-                  <span className={`${bodyFont.className} mt-1 text-[0.72rem] uppercase tracking-[0.24em] text-slate-950/80`}>
-                    {bubble.label}
-                  </span>
+                <div className="xentro-spin-counter flex flex-col items-center justify-center text-center text-slate-950">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/90 text-slate-950 shadow-sm">
+                    {bubble.icon}
+                  </div>
+                  <span className="sr-only">{bubble.label}</span>
                 </div>
               </div>
             </div>

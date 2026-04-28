@@ -88,7 +88,7 @@ export default function HeroSection() {
             <a
               href="#pricing"
               onClick={handleGetStartedClick}
-              className="bg-[#071829] text-white px-6 py-2.5 hover:bg-[#0d2744] transition-colors rounded-lg"
+              className="bg-[#1B17FF] text-white px-6 py-2.5 hover:bg-[#0d2744] transition-colors rounded-lg"
             >
               Get Started
             </a>
@@ -143,7 +143,7 @@ export default function HeroSection() {
           ↓ DARK STRIP — adjust h-[Xpx] to control how much dark is visible.
             This is independent of padding and video height.
         */}
-        <div className="absolute bottom-0 inset-x-0 h-[250px] bg-[#0b192c] rounded-t-3xl" />
+        <div className="absolute bottom-0 inset-x-0 h-[250px] bg-[#1B17FF] rounded-t-3xl" />
 
         {/* Video — sits on top of the dark strip (z-10 > strip) */}
         <div className="max-w-[1100px] mx-auto px-2 md:px-8 pt-3 md:pt-4 pb-0 relative z-10">
