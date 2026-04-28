@@ -50,19 +50,19 @@ export default function HeroSection() {
   return (
     <>
       {/* ═══════ WHITE TOP HERO SECTION ═══════ */}
-      <div id="top" className="bg-white text-[#0b192c] pt-8 pb-14 md:pb-16 relative overflow-hidden">
+      <div id="top" className="bg-white text-[#0b192c] pt-4 md:pt-6 pb-14 md:pb-16 relative overflow-hidden">
 
         {/* ── Navbar ── */}
         <nav className="relative z-10 mb-10 md:mb-14 flex items-center justify-between pl-6 pr-6 md:pl-8 md:pr-12 lg:pl-10 lg:pr-24">
           {/* Logo — pushed further left */}
-          <div className="flex w-full items-center gap-3 -ml-1 sm:w-88 lg:w-96">
+          <div className="flex w-full items-center gap-3 ml-0 sm:w-88 lg:w-96">
             <Image
-              src="/image-removebg-preview.png"
+              src="/xentro-logo-no%20bg.svg"
               alt="XENTRO"
               width={420}
               height={168}
               priority
-              className="h-24 w-auto sm:h-28 lg:h-32"
+              className="h-20 w-auto sm:h-24 lg:h-26"
             />
           </div>
 

@@ -95,6 +95,39 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@keyframes xentroSpinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.xentro-spin-slow {
+  animation: xentroSpinSlow 16s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+@keyframes xentroSpinCounter {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.xentro-spin-counter {
+  animation: xentroSpinCounter 16s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
 @keyframes xentroWordDissolve {
   0% {
     opacity: 0;

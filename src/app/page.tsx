@@ -1,3 +1,4 @@
+import LoadingOverlay from "@/components/LoadingOverlay";
 import HeroSection from "@/components/HeroSection";
 import CTASection from "@/components/CTASection";
 import FeatureRibbon from "@/components/FeatureRibbon";
@@ -9,8 +10,10 @@ import FAQSection from "@/components/FAQSection";
 
 export default function Home() {
   return (
-    <div className="w-full min-h-screen">
-      <HeroSection />
+    <>
+      <LoadingOverlay />
+      <div className="w-full min-h-screen">
+        <HeroSection />
 
       {/* Feature Ribbon */}
       <FeatureRibbon />
@@ -102,5 +105,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
