@@ -105,6 +105,35 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@keyframes xentroBubbleRise {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.88);
+  }
+
+  20% {
+    opacity: 0.16;
+  }
+
+  60% {
+    opacity: 0.12;
+    transform: translateY(-48px) scale(1.03);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-96px) scale(1.08);
+  }
+}
+
+.xentro-bubble-rise {
+  animation-name: xentroBubbleRise;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+}
+
 .xentro-spin-slow {
   animation: xentroSpinSlow 16s linear infinite;
   transform-origin: center center;

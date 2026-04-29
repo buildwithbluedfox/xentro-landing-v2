@@ -147,7 +147,7 @@ export default function HeroSection() {
 
         {/* Video — sits on top of the dark strip (z-10 > strip) */}
         <div className="max-w-[1100px] mx-auto px-2 md:px-8 pt-3 md:pt-4 pb-0 relative z-10">
-          <div className="w-full aspect-video rounded-[28px] overflow-hidden shadow-[0_20px_60px_rgba(11,25,44,0.35)] bg-[#0a1523] border-[6px] border-[#0b192c]/40">
+          <div className="w-full aspect-video overflow-hidden rounded-[28px] bg-transparent">
             <iframe
               className="w-full h-full object-cover"
               src="https://www.youtube.com/embed/SgmuplXU2iY?autoplay=1&mute=1&loop=1&playlist=SgmuplXU2iY&controls=0&rel=0&modestbranding=1&playsinline=1"

@@ -1,7 +1,7 @@
 import LoadingOverlay from "@/components/LoadingOverlay";
 import HeroSection from "@/components/HeroSection";
 import CTASection from "@/components/CTASection";
-import FeatureRibbon from "@/components/FeatureRibbon";
+// import FeatureRibbon from "@/components/FeatureRibbon";
 import FounderNoteSection from "@/components/FounderNoteSection";
 import FeaturesShowcaseSection from "@/components/FeaturesShowcaseSection";
 import PricingSection from "@/components/PricingSection";
@@ -16,7 +16,7 @@ export default function Home() {
         <HeroSection />
 
       {/* Feature Ribbon */}
-      <FeatureRibbon />
+      {/* <FeatureRibbon /> */}
 
       {/* Problem Statement Section */}
       <ProblemStatementSection />

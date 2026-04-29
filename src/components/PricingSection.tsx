@@ -73,6 +73,15 @@ const PLANS: Plan[] = [
   },
 ];
 
+const BUBBLES = [
+  { size: 32, left: "12%", delay: "0s", duration: "10s", opacity: 0.22 },
+  { size: 40, left: "26%", delay: "2.2s", duration: "13s", opacity: 0.19 },
+  { size: 24, left: "38%", delay: "1.1s", duration: "12.5s", opacity: 0.17 },
+  { size: 36, left: "54%", delay: "3.6s", duration: "14s", opacity: 0.21 },
+  { size: 28, left: "68%", delay: "4.8s", duration: "11.8s", opacity: 0.18 },
+  { size: 22, left: "82%", delay: "6.1s", duration: "10.8s", opacity: 0.16 },
+];
+
 function CheckIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} className="h-5 w-5">
@@ -180,7 +189,26 @@ export default function PricingSection() {
 
   return (
     <section ref={sectionRef} id="pricing" className="relative overflow-hidden py-24 md:py-30">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#3345f6_0%,#2f3ff2_100%)]" />
+      <div className="absolute inset-0 bg-[#1B17FF]" />
+
+      {/* Animated bubbles background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+        {BUBBLES.map((bubble, idx) => (
+          <span
+            key={idx}
+            className="absolute rounded-full bg-white/25 xentro-bubble-rise"
+            style={{
+              width: bubble.size,
+              height: bubble.size,
+              left: bubble.left,
+              bottom: `-${bubble.size * 0.5}px`,
+              animationDelay: bubble.delay,
+              animationDuration: bubble.duration,
+              opacity: bubble.opacity,
+            }}
+          />
+        ))}
+      </div>
 
       <div
         className="absolute inset-0 opacity-[0.24]"
