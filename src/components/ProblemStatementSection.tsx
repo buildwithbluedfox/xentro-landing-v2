@@ -23,9 +23,48 @@ const contentBlocks = [
   },
   {
     title: "Then you looked for a door.",
+    bubbles: [
+      { 
+        sender: "Incubators",
+        text: "Come back when you have traction.", 
+        className: "top-[8%] -left-[5%] sm:top-[15%] sm:-left-[25%] max-w-[180px] sm:max-w-[320px] rounded-tl-sm"
+      },
+      { 
+        sender: "Accelerators",
+        text: "Come back when you have revenue.", 
+        className: "bottom-[12%] left-[2%] sm:bottom-[20%] sm:-left-[15%] max-w-[180px] sm:max-w-[320px] rounded-tl-sm"
+      },
+      { 
+        sender: "The Internet",
+        text: "Here are 200 frameworks. Good luck.", 
+        className: "top-[30%] -right-[5%] sm:top-[40%] sm:-right-[25%] max-w-[180px] sm:max-w-[320px] rounded-tr-sm"
+      },
+    ]
   },
   {
     title: "Every door was locked.",
+    bubbles: [
+      { 
+        sender: "You",
+        text: "Who do I talk to first?", 
+        className: "top-[10%] -left-[2%] sm:top-[20%] sm:-left-[20%] max-w-[160px] sm:max-w-[280px] rounded-br-sm"
+      },
+      { 
+        sender: "You",
+        text: "How do I know if my idea is any good?", 
+        className: "bottom-[15%] -left-[5%] sm:bottom-[25%] sm:-left-[25%] max-w-[180px] sm:max-w-[300px] rounded-bl-sm"
+      },
+      { 
+        sender: "You",
+        text: "Where do I even begin?", 
+        className: "top-[5%] right-[2%] sm:top-[15%] sm:-right-[15%] max-w-[160px] sm:max-w-[260px] rounded-tr-sm"
+      },
+      { 
+        sender: "You",
+        text: "Is there anyone out there building what I'm building?", 
+        className: "bottom-[20%] -right-[5%] sm:bottom-[30%] sm:-right-[25%] max-w-[180px] sm:max-w-[320px] rounded-br-sm"
+      },
+    ]
   },
   {
     title: "Does this story sounds Familiar?",
@@ -133,6 +172,19 @@ export default function ProblemStatementSection() {
           },
           outTime,
         );
+
+        // Parallax upward floating effect for text bubbles if they exist
+        const bubbles = line.querySelectorAll('.text-bubble');
+        if (bubbles.length > 0) {
+          bubbles.forEach((bubble, bIndex) => {
+            const speedMult = 1 + (bIndex % 3) * 0.4;
+            tl.fromTo(bubble, 
+              { y: 80 * speedMult }, 
+              { y: -120 * speedMult, duration: 2.2, ease: "none" }, 
+              index * 2.5
+            );
+          });
+        }
         
         maxTime = Math.max(maxTime, outTime + 0.6);
       });
@@ -223,14 +275,35 @@ export default function ProblemStatementSection() {
               className="problem-line absolute inset-0 flex flex-col items-center justify-center mx-auto w-full text-center px-4"
             >
               <h2
-                className={`${headingFont.className} text-[2rem] font-semibold leading-[1.02] tracking-[-0.03em] text-white sm:text-[2.8rem] md:text-[3.4rem]`}
+                className={`${headingFont.className} text-[2rem] font-semibold leading-[1.02] tracking-[-0.03em] text-white sm:text-[2.8rem] md:text-[3.4rem] relative z-10`}
               >
                 {block.title}
               </h2>
               {block.subtitle && (
-                <p className="mt-6 text-[1.1rem] sm:text-[1.3rem] text-white/80 max-w-2xl font-medium">
+                <p className="mt-6 text-[1.1rem] sm:text-[1.3rem] text-white/80 max-w-2xl font-medium relative z-10">
                   {block.subtitle}
                 </p>
+              )}
+              
+              {/* Floating Text Bubbles */}
+              {block.bubbles && block.bubbles.length > 0 && (
+                <div className="absolute inset-0 w-full h-full pointer-events-none z-20">
+                  {block.bubbles.map((bubble, bIndex) => (
+                    <div 
+                      key={bIndex} 
+                      className={`text-bubble absolute bg-white px-4 py-3 sm:px-5 sm:py-4 rounded-2xl shadow-xl text-left tracking-tight leading-snug ${bubble.className}`}
+                    >
+                      {bubble.sender && (
+                        <div className="text-[#1B17FF] font-semibold text-[13px] sm:text-[15px] mb-1 leading-none">
+                          {bubble.sender}
+                        </div>
+                      )}
+                      <div className="text-slate-600 font-medium text-[13px] sm:text-base lg:text-[17px]">
+                        {bubble.text}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           ))}

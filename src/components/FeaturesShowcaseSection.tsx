@@ -36,7 +36,6 @@ const ROLES = [
 
 export default function FeaturesShowcaseSection() {
   const containerRef = useRef<HTMLElement>(null);
-  const [isInteractive, setIsInteractive] = useState(false);
   const [activeRole, setActiveRole] = useState(-1);
 
   useGSAP(() => {
@@ -52,11 +51,9 @@ export default function FeaturesShowcaseSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=4500", // Increased scroll distance for smoothness
+          end: "+=1500", // Drastically reduced scroll distance to make bubbles appear quickly
           scrub: 1.5,    // Increased scrub interpolation for smoothness
           pin: true,
-          onLeave: () => setIsInteractive(true),
-          onEnterBack: () => setIsInteractive(false),
         }
       });
       
@@ -99,7 +96,11 @@ export default function FeaturesShowcaseSection() {
       tl.to(".role-text-1", { opacity: 0, y: -20, duration: 0.4 }, ">-0.2");
       tl.to(".role-text-2", { opacity: 1, y: 0, duration: 0.4 }, "<0.2");
 
-      tl.to({}, { duration: 0.5 });
+      // Fade in the final text message
+      tl.to(".final-text", { opacity: 1, y: 0, duration: 0.5 }, "+=0.2");
+
+      // Scroll buffer: keeps section pinned for longer after animations finish
+      tl.to({}, { duration: 3.5 });
     });
 
     mm.add("(max-width: 1023px)", () => {
@@ -107,11 +108,9 @@ export default function FeaturesShowcaseSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=4500", // Increased scroll distance for smoothness
+          end: "+=1500", // Drastically reduced scroll distance to make bubbles appear quickly
           scrub: 1.5,    // Increased scrub interpolation for smoothness
           pin: true,
-          onLeave: () => setIsInteractive(true),
-          onEnterBack: () => setIsInteractive(false),
         }
       });
       
@@ -145,14 +144,18 @@ export default function FeaturesShowcaseSection() {
       tl.to(".role-text-1", { opacity: 0, y: -20, duration: 0.4 }, ">-0.2");
       tl.to(".role-text-2", { opacity: 1, y: 0, duration: 0.4 }, "<0.2");
 
-      tl.to({}, { duration: 0.5 });
+      // Fade in the final text message
+      tl.to(".final-text", { opacity: 1, y: 0, duration: 0.5 }, "+=0.2");
+
+      // Scroll buffer: keeps section pinned for longer after animations finish
+      tl.to({}, { duration: 3.5 });
     });
 
     return () => mm.revert();
   }, { scope: containerRef });
 
   const handleBubbleClick = (index: number) => {
-    if (!isInteractive || activeRole === index) return;
+    if (activeRole === index) return;
     
     // Crossfade text manually
     if (activeRole !== -1) {
@@ -184,7 +187,6 @@ export default function FeaturesShowcaseSection() {
               </p>
             </div>
 
-            {/* Role Texts */}
             {ROLES.map((role, i) => (
               <div key={role.id} className={`role-text role-text-${i} absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none`}>
                 <h2 className={`${headingFont.className} text-white text-4xl lg:text-6xl font-bold mb-4 tracking-tight leading-tight`}>
@@ -195,6 +197,14 @@ export default function FeaturesShowcaseSection() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Final Text (appears when interactive) */}
+          <div className="final-text absolute bottom-12 lg:bottom-16 left-8 sm:left-12 lg:left-24 opacity-0 pointer-events-none max-w-lg z-30">
+            <h3 className={`${headingFont.className} text-white text-2xl lg:text-3xl font-bold tracking-tight`}>
+              Whoever you are, Xentro's got you covered.
+            </h3>
+            <p className="text-white/70 mt-2 text-sm lg:text-base font-medium">Click the circles to explore.</p>
           </div>
         </div>
 
@@ -211,10 +221,10 @@ export default function FeaturesShowcaseSection() {
              <div 
                key={role.id}
                onClick={() => handleBubbleClick(i)}
-               className={`bubble bubble-${i} absolute w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 rounded-full border-[3px] border-white bg-[#1B17FF] flex flex-col items-center justify-center shadow-2xl transition-all duration-300 ${isInteractive ? 'pointer-events-auto cursor-pointer' : ''}`}
+               className={`bubble bubble-${i} absolute w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 rounded-full border-[3px] border-white flex flex-col items-center justify-center shadow-2xl transition-all duration-300 pointer-events-auto cursor-pointer`}
                style={{
-                 backgroundColor: isInteractive && activeRole === i ? 'white' : '#1B17FF',
-                 color: isInteractive && activeRole === i ? '#1B17FF' : 'white',
+                 backgroundColor: activeRole === i ? 'white' : '#1B17FF',
+                 color: activeRole === i ? '#1B17FF' : 'white',
                }}
              >
                <span className={`${headingFont.className} font-bold text-sm sm:text-base lg:text-lg`}>{role.title.replace('For ', '')}</span>

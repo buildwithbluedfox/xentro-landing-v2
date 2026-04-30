@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import type { MouseEvent } from "react";
 import Image from "next/image";
 
@@ -34,6 +35,39 @@ const heroHeadlineLines = [
 ];
 
 export default function HeroSection() {
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const scrollUpStartY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window !== "undefined") {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY <= 100) {
+          // Always show at the top
+          setIsNavVisible(true);
+          scrollUpStartY.current = currentScrollY;
+        } else if (currentScrollY > lastScrollY.current) {
+          // Scrolling down
+          setIsNavVisible(false);
+          scrollUpStartY.current = currentScrollY;
+        } else if (currentScrollY < lastScrollY.current) {
+          // Scrolling up
+          // Require ~20 lines (300px) of upward scroll before showing
+          if (scrollUpStartY.current - currentScrollY > 300) {
+            setIsNavVisible(true);
+          }
+        }
+        
+        lastScrollY.current = currentScrollY;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleGetStartedClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
 
@@ -53,16 +87,16 @@ export default function HeroSection() {
       <div id="top" className="bg-white text-[#0b192c] pt-4 md:pt-6 pb-14 md:pb-16 relative overflow-hidden">
 
         {/* ── Navbar ── */}
-        <nav className="relative z-10 mb-10 md:mb-14 flex items-center justify-between pl-6 pr-6 md:pl-8 md:pr-12 lg:pl-10 lg:pr-24">
+        <nav className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 py-4 md:px-8 lg:px-10 bg-white/95 backdrop-blur-sm border-b border-black/5 transition-transform duration-300 ${isNavVisible ? "translate-y-0" : "-translate-y-full"}`}>
           {/* Logo — pushed further left */}
           <div className="flex w-full items-center gap-3 ml-0 sm:w-88 lg:w-96">
             <Image
-              src="/xentro-logo-no%20bg.svg"
+              src="/xentro-logo-no%20bg%20black%20text.svg"
               alt="XENTRO"
               width={420}
               height={168}
               priority
-              className="h-20 w-auto sm:h-24 lg:h-26"
+              className="h-16 w-auto sm:h-20 lg:h-24"
             />
           </div>
 
@@ -96,7 +130,7 @@ export default function HeroSection() {
         </nav>
 
         {/* ── Hero Content — two columns side by side ── */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.3fr_0.85fr] gap-8 max-w-[1100px] mx-auto px-6 md:px-12 lg:px-10 relative z-10">
+        <div className="pt-32 md:pt-40 grid grid-cols-1 md:grid-cols-[1.3fr_0.85fr] gap-8 max-w-[1100px] mx-auto px-6 md:px-12 lg:px-10 relative z-10">
           {/* Left Hero — Main headline */}
           <div>
             <h1 className="text-[3.2rem] sm:text-[4.2rem] lg:text-[4.8rem] font-bold leading-[1.08] tracking-[-0.02em] mb-4">
