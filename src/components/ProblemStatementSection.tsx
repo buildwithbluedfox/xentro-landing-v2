@@ -5,8 +5,11 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -83,7 +86,7 @@ const parallaxPills = [
 export default function ProblemStatementSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const ctx = gsap.context(() => {
       const lineElements = gsap.utils.toArray<HTMLElement>(".problem-line");
       gsap.set(lineElements, {
@@ -175,7 +178,7 @@ export default function ProblemStatementSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section id="problem" ref={sectionRef} className="relative overflow-hidden bg-[#1B17FF] h-screen">

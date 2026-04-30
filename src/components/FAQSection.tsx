@@ -38,23 +38,23 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="w-full bg-[#060b14] px-6 py-20 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-7xl rounded-[1.8rem] bg-[#eef1f5] px-8 py-12 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
+    <section id="faq" className="w-full bg-white px-6 py-20 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-7xl rounded-[1.8rem] bg-white border-[3px] border-[#1B17FF] px-8 py-12 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
           <div>
-            <h2 className="text-[2.15rem] font-bold leading-[1.06] tracking-[-0.02em] text-[#101420] sm:text-[2.8rem]">
+            <h2 className="text-[2.15rem] font-bold leading-[1.06] tracking-[-0.02em] text-black sm:text-[2.8rem]">
               Any questions?
               <br />
               We got you.
             </h2>
 
-            <p className="mt-8 max-w-md text-[1rem] leading-[1.8] text-[#30374a]/85 sm:text-[1.06rem]">
+            <p className="mt-8 max-w-md text-[1rem] leading-[1.8] text-black/80 sm:text-[1.06rem]">
               Find quick answers about pricing, access, and platform features. If you need anything else, our team is happy to help.
             </p>
 
             <a
               href="#"
-              className="mt-8 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-[#4a4bd0] transition-colors hover:text-[#3234b4]"
+              className="mt-8 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-[#1B17FF] transition-colors hover:text-[#1B17FF]/80"
             >
               More FAQs
               <span aria-hidden="true">→</span>
@@ -66,17 +66,17 @@ export default function FAQSection() {
               const isOpen = index === openIndex;
 
               return (
-                <article key={item.question} className="border-b border-[#a8afbc]">
+                <article key={item.question} className="border-b border-black/20">
                   <button
                     type="button"
                     onClick={() => toggleItem(index)}
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-4 py-4 text-left"
                   >
-                    <span className="text-[1.16rem] font-semibold tracking-[-0.01em] text-[#151a28]">
+                    <span className="text-[1.16rem] font-semibold tracking-[-0.01em] text-black">
                       {item.question}
                     </span>
-                    <span className="relative h-6 w-6 text-[1.25rem] font-semibold text-[#2a3142]" aria-hidden="true">
+                    <span className="relative h-6 w-6 text-[1.25rem] font-semibold text-black" aria-hidden="true">
                       <span
                         className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
                           isOpen ? "opacity-0 -rotate-90" : "opacity-100 rotate-0"
@@ -100,7 +100,7 @@ export default function FAQSection() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="pb-5 pr-8 text-[1rem] leading-[1.75] text-[#31384b]/90">{item.answer}</p>
+                      <p className="pb-5 pr-8 text-[1rem] leading-[1.75] text-black/80">{item.answer}</p>
                     </div>
                   </div>
                 </article>
