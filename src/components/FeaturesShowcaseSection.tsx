@@ -198,7 +198,7 @@ export default function FeaturesShowcaseSection() {
     <section ref={containerRef} className="relative h-screen w-full bg-[#1B17FF] overflow-hidden">
       <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
         {/* Left Panel - Text */}
-        <div className="relative flex flex-col justify-center px-8 sm:px-12 lg:px-24 h-[50vh] lg:h-full z-20">
+        <div className="relative flex flex-col justify-center px-8 sm:px-12 lg:px-24 h-[45vh] lg:h-full z-20">
           <div className="relative w-full max-w-xl">
             {/* Intro Text */}
             <div className="role-text-intro absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none">
@@ -223,9 +223,9 @@ export default function FeaturesShowcaseSection() {
           </div>
 
           {/* Final Text (appears when interactive) */}
-          <div className="final-text absolute bottom-12 lg:bottom-16 left-8 sm:left-12 lg:left-24 opacity-0 pointer-events-none max-w-lg z-30">
+          <div className="final-text relative mt-auto pt-6 lg:absolute lg:bottom-16 lg:left-24 opacity-0 pointer-events-none max-w-lg z-30">
             <h3 className={`${headingFont.className} text-white text-2xl lg:text-3xl font-bold tracking-tight`}>
-              Whoever you are, Xentro's got you covered.
+              Whoever you are, Xentro&apos;s got you covered.
             </h3>
             <p className="text-white/70 mt-2 text-sm lg:text-base font-medium">Click the circles to explore.</p>
           </div>

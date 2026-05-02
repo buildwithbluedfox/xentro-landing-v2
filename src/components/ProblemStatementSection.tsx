@@ -254,7 +254,7 @@ export default function ProblemStatementSection() {
         </div>
         
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 flex-col">
-          <h2 className={`introducing-text absolute ${headingFont.className} font-semibold leading-[1.02] tracking-[-0.03em] text-white text-[4.5rem] sm:text-[6rem] md:text-[7.5rem]`}>
+          <h2 className={`introducing-text absolute ${headingFont.className} font-semibold leading-[1.02] tracking-[-0.04em] text-white text-[1.6rem] sm:text-[2rem] md:text-[2.4rem] uppercase tracking-widest opacity-70`}>
             Introducing
           </h2>
           <div className="translate-x-4 md:translate-x-12">
@@ -263,7 +263,7 @@ export default function ProblemStatementSection() {
               alt="Xentro logo"
               width={1200}
               height={1200}
-              className="xentro-logo w-[48vw] max-w-[48vw] max-h-[48vh] h-auto"
+              className="xentro-logo w-[72vw] max-w-[72vw] max-h-[55vh] h-auto"
             />
           </div>
         </div>

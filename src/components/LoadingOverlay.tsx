@@ -2,10 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const DESKTOP_SRC = "/xentro%20loading.mp4";
+const MOBILE_SRC  = "/loading%20screen%20mobile.mp4";
+
 export default function LoadingOverlay() {
   const [visible, setVisible] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(DESKTOP_SRC);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Pick the right source based on viewport width before first paint
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    setVideoSrc(isMobile ? MOBILE_SRC : DESKTOP_SRC);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -32,7 +42,7 @@ export default function LoadingOverlay() {
       window.clearTimeout(timeoutId);
       video.pause();
     };
-  }, []);
+  }, [videoSrc]); // re-run when source resolves so play() fires after src is set
 
   useEffect(() => {
     if (!isFadingOut) return;
@@ -59,6 +69,7 @@ export default function LoadingOverlay() {
       className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#050812] text-white transition-opacity duration-700 ease-out ${isFadingOut ? "opacity-0" : "opacity-100"}`}
     >
       <video
+        key={videoSrc}           /* force remount when src changes */
         ref={videoRef}
         className="h-full w-full object-cover"
         muted
@@ -67,7 +78,7 @@ export default function LoadingOverlay() {
         onEnded={handleVideoEnd}
         preload="auto"
       >
-        <source src="/xentro%20loading.mp4" type="video/mp4" />
+        <source src={videoSrc} type="video/mp4" />
       </video>
     </div>
   );
