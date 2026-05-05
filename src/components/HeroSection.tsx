@@ -68,18 +68,7 @@ export default function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleGetStartedClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
 
-    const pricingSection = document.getElementById("pricing");
-
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
-    window.location.hash = "pricing";
-  };
 
   return (
     <>
@@ -120,8 +109,9 @@ export default function HeroSection() {
           {/* Right Button */}
           <div className="hidden w-45 items-center justify-end text-[13px] font-semibold md:flex">
             <a
-              href="#pricing"
-              onClick={handleGetStartedClick}
+              href="https://app.xentro.in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-[#1B17FF] text-white px-6 py-2.5 hover:bg-[#0d2744] transition-colors rounded-lg"
             >
               Get Started
@@ -156,11 +146,10 @@ export default function HeroSection() {
               </a>
             ))}
             <a
-              href="#pricing"
-              onClick={(e) => {
-                setIsMobileMenuOpen(false);
-                handleGetStartedClick(e);
-              }}
+              href="https://app.xentro.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="bg-[#1B17FF] text-white px-8 py-3 hover:bg-[#0d2744] transition-colors rounded-lg text-[15px] font-semibold mt-2 w-[80%] text-center"
             >
               Get Started

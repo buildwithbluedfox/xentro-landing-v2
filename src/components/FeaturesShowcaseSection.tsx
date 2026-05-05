@@ -48,18 +48,31 @@ export default function FeaturesShowcaseSection() {
   useEffect(() => {
     if (previousRole.current === activeRole) return;
 
-    // Fade out previous
-    if (previousRole.current !== -1) {
-      gsap.to(`.role-text-${previousRole.current}`, { opacity: 0, y: -20, duration: 0.3, overwrite: "auto" });
-    } else {
-      gsap.to(`.role-text-intro`, { opacity: 0, y: -20, duration: 0.3, overwrite: "auto" });
-    }
+    // Bulletproof: Hide ALL text elements first, stopping any ongoing fade-ins
+    gsap.to(".role-text, .role-text-intro", { 
+      opacity: 0, 
+      y: -20, 
+      duration: 0.3, 
+      overwrite: true 
+    });
 
-    // Fade in current
+    // Fade in the newly active text
     if (activeRole !== -1) {
-      gsap.to(`.role-text-${activeRole}`, { opacity: 1, y: 0, duration: 0.3, delay: 0.1, overwrite: "auto" });
+      gsap.to(`.role-text-${activeRole}`, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.3, 
+        delay: 0.15, 
+        overwrite: "auto" 
+      });
     } else {
-      gsap.to(`.role-text-intro`, { opacity: 1, y: 0, duration: 0.3, delay: 0.1, overwrite: "auto" });
+      gsap.to(`.role-text-intro`, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.3, 
+        delay: 0.15, 
+        overwrite: "auto" 
+      });
     }
 
     previousRole.current = activeRole;
@@ -79,7 +92,7 @@ export default function FeaturesShowcaseSection() {
           trigger: containerRef.current,
           start: "top top",
           end: "+=1500", // Drastically reduced scroll distance to make bubbles appear quickly
-          scrub: 1.5,    // Increased scrub interpolation for smoothness
+          scrub: 0.1,    // Reduced scrub interpolation to fix fast scrolling detaches
           pin: true,
         }
       });
@@ -136,7 +149,7 @@ export default function FeaturesShowcaseSection() {
           trigger: containerRef.current,
           start: "top top",
           end: "+=1500", // Drastically reduced scroll distance to make bubbles appear quickly
-          scrub: 1.5,    // Increased scrub interpolation for smoothness
+          scrub: 0.1,    // Reduced scrub interpolation to fix fast scrolling detaches
           pin: true,
         }
       });

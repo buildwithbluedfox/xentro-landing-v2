@@ -262,7 +262,7 @@ export default function ProblemStatementSection() {
         </div>
         
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 flex-col">
-          <h2 className={`introducing-text absolute ${headingFont.className} font-semibold leading-[1.02] tracking-[-0.04em] text-white text-[1.6rem] sm:text-[2rem] md:text-[2.4rem] uppercase tracking-widest opacity-70`}>
+          <h2 className={`introducing-text absolute ${headingFont.className} font-bold leading-[1.02] tracking-[0.15em] text-white text-[1.6rem] sm:text-[2rem] md:text-[3.5rem] lg:text-[5rem] uppercase opacity-70`}>
             Introducing
           </h2>
           <div className="translate-x-4 md:translate-x-12">

@@ -281,7 +281,9 @@ export default function PricingSection() {
                 </ul>
 
                 <a
-                  href="#waitlist"
+                  href="https://app.xentro.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`${headingFont.className} inline-flex items-center justify-center gap-2 rounded-full bg-[#080c2f] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#0e1446]`}
                 >
                   Get Started
@@ -320,7 +322,9 @@ export default function PricingSection() {
               <span className={`${bodyFont.className} ml-1 text-base font-medium text-white/58`}>for pricing</span>
             </div>
             <a
-              href="#waitlist"
+              href="https://app.xentro.in"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`${headingFont.className} inline-flex items-center gap-2 rounded-full bg-[#f7f8fb] px-6 py-3 text-sm font-semibold text-[#0a0d30] transition-all duration-300 hover:bg-white`}
             >
               Get Started
