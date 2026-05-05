@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +42,28 @@ const ROLES = [
 export default function FeaturesShowcaseSection() {
   const containerRef = useRef<HTMLElement>(null);
   const [activeRole, setActiveRole] = useState(-1);
+  const previousRole = useRef(-1);
+
+  // Handle text crossfading outside of ScrollTrigger
+  useEffect(() => {
+    if (previousRole.current === activeRole) return;
+
+    // Fade out previous
+    if (previousRole.current !== -1) {
+      gsap.to(`.role-text-${previousRole.current}`, { opacity: 0, y: -20, duration: 0.3, overwrite: "auto" });
+    } else {
+      gsap.to(`.role-text-intro`, { opacity: 0, y: -20, duration: 0.3, overwrite: "auto" });
+    }
+
+    // Fade in current
+    if (activeRole !== -1) {
+      gsap.to(`.role-text-${activeRole}`, { opacity: 1, y: 0, duration: 0.3, delay: 0.1, overwrite: "auto" });
+    } else {
+      gsap.to(`.role-text-intro`, { opacity: 1, y: 0, duration: 0.3, delay: 0.1, overwrite: "auto" });
+    }
+
+    previousRole.current = activeRole;
+  }, [activeRole]);
 
   useGSAP(() => {
     let mm = gsap.matchMedia();
@@ -80,9 +102,6 @@ export default function FeaturesShowcaseSection() {
         onStart: () => setActiveRole(0),
         onReverseComplete: () => setActiveRole(-1)
       }, "+=0.2");
-      tl.to(".role-text-intro", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-0", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble0");
 
       // 4. Bubble 2 (Mentors)
       tl.to(".bubble-1", { 
@@ -90,9 +109,6 @@ export default function FeaturesShowcaseSection() {
         onStart: () => setActiveRole(1),
         onReverseComplete: () => setActiveRole(0)
       }, "+=0.2");
-      tl.to(".role-text-0", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-1", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble1");
 
       // 5. Bubble 3 (Investors)
       tl.to(".bubble-2", { 
@@ -100,9 +116,6 @@ export default function FeaturesShowcaseSection() {
         onStart: () => setActiveRole(2),
         onReverseComplete: () => setActiveRole(1)
       }, "+=0.2");
-      tl.to(".role-text-1", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-2", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble2");
 
       // 6. Bubble 4 (Institutions)
       tl.to(".bubble-3", { 
@@ -110,9 +123,6 @@ export default function FeaturesShowcaseSection() {
         onStart: () => setActiveRole(3),
         onReverseComplete: () => setActiveRole(2)
       }, "+=0.2");
-      tl.to(".role-text-2", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-3", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble3");
 
       // Fade in the final text message
       tl.to(".final-text", { opacity: 1, y: 0, duration: 0.5 }, "+=0.2");
@@ -143,27 +153,18 @@ export default function FeaturesShowcaseSection() {
         onStart: () => setActiveRole(0),
         onReverseComplete: () => setActiveRole(-1)
       }, "+=0.2");
-      tl.to(".role-text-intro", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-0", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble0");
 
       tl.to(".bubble-1", { 
         scale: 1, opacity: 1, x: "-28vw", y: "8vh", duration: 1,
         onStart: () => setActiveRole(1),
         onReverseComplete: () => setActiveRole(0)
       }, "+=0.2");
-      tl.to(".role-text-0", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-1", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble1");
 
       tl.to(".bubble-2", { 
         scale: 1, opacity: 1, x: "28vw", y: "36vh", duration: 1,
         onStart: () => setActiveRole(2),
         onReverseComplete: () => setActiveRole(1)
       }, "+=0.2");
-      tl.to(".role-text-1", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-2", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble2");
 
       // Bubble 4 (Institutions)
       tl.to(".bubble-3", { 
@@ -171,9 +172,6 @@ export default function FeaturesShowcaseSection() {
         onStart: () => setActiveRole(3),
         onReverseComplete: () => setActiveRole(2)
       }, "+=0.2");
-      tl.to(".role-text-2", { opacity: 0, y: -20, duration: 0.3 }, ">-0.5");
-      tl.to(".role-text-3", { opacity: 1, y: 0, duration: 0.3 }, ">");
-      tl.addLabel("bubble3");
 
       // Fade in the final text message
       tl.to(".final-text", { opacity: 1, y: 0, duration: 0.5 }, "+=0.2");
@@ -186,27 +184,7 @@ export default function FeaturesShowcaseSection() {
   }, { scope: containerRef });
 
   const handleBubbleClick = (index: number) => {
-    if (activeRole === index) return;
-    
-    // Instead of overriding ScrollTrigger with conflicting manual tweens,
-    // seamlessly scroll the page to the target bubble's position in the timeline!
-    const triggers = ScrollTrigger.getAll();
-    const st = triggers.find(t => t.vars.trigger === containerRef.current);
-    
-    if (st && st.animation) {
-      const tl = st.animation as gsap.core.Timeline;
-      const labelTime = tl.labels[`bubble${index}`];
-      
-      if (labelTime !== undefined) {
-        const progress = labelTime / tl.duration();
-        const scrollTarget = st.start + (st.end - st.start) * progress;
-        
-        window.scrollTo({
-          top: scrollTarget,
-          behavior: 'smooth'
-        });
-      }
-    }
+    setActiveRole(index);
   };
 
   return (
