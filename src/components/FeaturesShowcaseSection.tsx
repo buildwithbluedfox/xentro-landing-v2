@@ -193,7 +193,7 @@ export default function FeaturesShowcaseSection() {
         <div className="relative flex flex-col justify-center px-8 sm:px-12 lg:px-24 h-[45vh] lg:h-full z-20">
           <div className="relative w-full max-w-xl h-[200px] sm:h-[220px] lg:h-[300px]">
             {/* Intro Text */}
-            <div className="role-text-intro absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none">
+            <div className="role-text-intro absolute top-0 lg:top-1/2 lg:-translate-y-1/2 left-0 w-full pointer-events-none">
               <h2 className={`${headingFont.className} text-white text-4xl lg:text-6xl font-bold mb-4 tracking-tight leading-tight`}>
                 Engineered for Liftoff
               </h2>
@@ -203,7 +203,7 @@ export default function FeaturesShowcaseSection() {
             </div>
 
             {ROLES.map((role, i) => (
-              <div key={role.id} className={`role-text role-text-${i} absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none`}>
+              <div key={role.id} className={`role-text role-text-${i} absolute top-0 lg:top-1/2 lg:-translate-y-1/2 left-0 w-full pointer-events-none`}>
                 <h2 className={`${headingFont.className} text-white text-4xl lg:text-6xl font-bold mb-4 tracking-tight leading-tight`}>
                   {role.title}
                 </h2>
