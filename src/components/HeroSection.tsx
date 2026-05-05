@@ -36,6 +36,7 @@ const heroHeadlineLines = [
 
 export default function HeroSection() {
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
   const scrollUpStartY = useRef(0);
 
@@ -118,11 +119,50 @@ export default function HeroSection() {
           </div>
 
           {/* Right Button */}
-          <div className="hidden w-45 items-center justify-end text-[13px] font-semibold sm:flex">
+          <div className="hidden w-45 items-center justify-end text-[13px] font-semibold md:flex">
             <a
               href="#pricing"
               onClick={handleGetStartedClick}
               className="bg-[#1B17FF] text-white px-6 py-2.5 hover:bg-[#0d2744] transition-colors rounded-lg"
+            >
+              Get Started
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center justify-end">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-[#0b192c]"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+              )}
+            </button>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          <div className={`absolute top-full left-0 w-full bg-white border-b border-black/5 flex flex-col items-center py-6 gap-5 shadow-lg transition-all duration-300 md:hidden origin-top ${isMobileMenuOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0 pointer-events-none"}`}>
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`transition-colors hover:text-[#0b192c] text-[16px] ${item.href === "#top" ? "text-[#0b192c] font-semibold" : "text-[#0b192c]/60"}`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="#pricing"
+              onClick={(e) => {
+                setIsMobileMenuOpen(false);
+                handleGetStartedClick(e);
+              }}
+              className="bg-[#1B17FF] text-white px-8 py-3 hover:bg-[#0d2744] transition-colors rounded-lg text-[15px] font-semibold mt-2 w-[80%] text-center"
             >
               Get Started
             </a>

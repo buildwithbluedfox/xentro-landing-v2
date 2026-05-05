@@ -129,13 +129,13 @@ export default function FeaturesShowcaseSection() {
       });
       
       // Set bubble origin to the migrated center on mobile
-      gsap.set(".bubble", { x: 0, y: "25vh" });
+      gsap.set(".bubble", { x: 0, y: "22vh" });
 
       tl.fromTo(".main-logo", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "power2.out" });
-      tl.to(".main-logo", { y: "25vh", duration: 1, ease: "power2.inOut" });
+      tl.to(".main-logo", { y: "22vh", duration: 1, ease: "power2.inOut" });
 
       tl.to(".bubble-0", { 
-        scale: 1, opacity: 1, x: "25vw", y: "15vh", duration: 1,
+        scale: 1, opacity: 1, x: "28vw", y: "8vh", duration: 1,
         onStart: () => setActiveRole(0),
         onReverseComplete: () => setActiveRole(-1)
       }, "+=0.2");
@@ -143,7 +143,7 @@ export default function FeaturesShowcaseSection() {
       tl.to(".role-text-0", { opacity: 1, y: 0, duration: 0.4 }, "<0.2");
 
       tl.to(".bubble-1", { 
-        scale: 1, opacity: 1, x: "-25vw", y: "15vh", duration: 1,
+        scale: 1, opacity: 1, x: "-28vw", y: "8vh", duration: 1,
         onStart: () => setActiveRole(1),
         onReverseComplete: () => setActiveRole(0)
       }, "+=0.2");
@@ -151,7 +151,7 @@ export default function FeaturesShowcaseSection() {
       tl.to(".role-text-1", { opacity: 1, y: 0, duration: 0.4 }, "<0.2");
 
       tl.to(".bubble-2", { 
-        scale: 1, opacity: 1, x: "0vw", y: "42vh", duration: 1,
+        scale: 1, opacity: 1, x: "28vw", y: "36vh", duration: 1,
         onStart: () => setActiveRole(2),
         onReverseComplete: () => setActiveRole(1)
       }, "+=0.2");
@@ -160,7 +160,7 @@ export default function FeaturesShowcaseSection() {
 
       // Bubble 4 (Institutions)
       tl.to(".bubble-3", { 
-        scale: 1, opacity: 1, x: "-25vw", y: "42vh", duration: 1,
+        scale: 1, opacity: 1, x: "-28vw", y: "36vh", duration: 1,
         onStart: () => setActiveRole(3),
         onReverseComplete: () => setActiveRole(2)
       }, "+=0.2");
@@ -195,11 +195,12 @@ export default function FeaturesShowcaseSection() {
   };
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full bg-[#1B17FF] overflow-hidden">
+    <div id="features">
+      <section ref={containerRef} className="relative h-screen w-full bg-[#1B17FF] overflow-hidden">
       <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2">
         {/* Left Panel - Text */}
         <div className="relative flex flex-col justify-center px-8 sm:px-12 lg:px-24 h-[45vh] lg:h-full z-20">
-          <div className="relative w-full max-w-xl">
+          <div className="relative w-full max-w-xl h-[200px] sm:h-[220px] lg:h-[300px]">
             {/* Intro Text */}
             <div className="role-text-intro absolute top-1/2 -translate-y-1/2 left-0 w-full pointer-events-none">
               <h2 className={`${headingFont.className} text-white text-4xl lg:text-6xl font-bold mb-4 tracking-tight leading-tight`}>
@@ -261,6 +262,7 @@ export default function FeaturesShowcaseSection() {
 
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }

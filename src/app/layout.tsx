@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Red_Hat_Display } from "next/font/google";
 import "./globals.css";
 
@@ -18,14 +18,19 @@ export const metadata: Metadata = {
   description: "Landing page for XENTRO digital entrepreneurship ecosystem",
 };
 
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  colorScheme: "light",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${redHatDisplay.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html lang="en" className={`${inter.variable} ${redHatDisplay.variable}`} style={{ colorScheme: 'light' }}>
+      <body className="antialiased bg-white text-[#0b192c]">{children}</body>
     </html>
   );
 }

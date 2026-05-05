@@ -6,8 +6,9 @@
 }
 
 :root {
-  --background: #0b192c;
-  --foreground: #ffffff;
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #0b192c;
 }
 
 html {

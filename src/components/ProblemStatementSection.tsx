@@ -128,10 +128,14 @@ export default function ProblemStatementSection() {
   useGSAP(() => {
     const ctx = gsap.context(() => {
       const lineElements = gsap.utils.toArray<HTMLElement>(".problem-line");
-      gsap.set(lineElements, {
-        opacity: 0,
-        y: 28,
-        filter: "blur(8px)",
+      
+      // Hide all lines EXCEPT the first one initially so there's no blank viewport
+      lineElements.forEach((line, index) => {
+        if (index > 0) {
+          gsap.set(line, { opacity: 0, y: 28, filter: "blur(8px)" });
+        } else {
+          gsap.set(line, { opacity: 1, y: 0, filter: "blur(0px)" });
+        }
       });
 
       const tl = gsap.timeline({
@@ -148,17 +152,20 @@ export default function ProblemStatementSection() {
       let maxTime = 0;
 
       lineElements.forEach((line, index) => {
-        tl.to(
-          line,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          index * 2.5,
-        );
+        // Only animate IN the elements that were hidden (index > 0)
+        if (index > 0) {
+          tl.to(
+            line,
+            {
+              opacity: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            index * 2.5,
+          );
+        }
 
         const outTime = index * 2.5 + 1.6;
         tl.to(
@@ -189,7 +196,7 @@ export default function ProblemStatementSection() {
         maxTime = Math.max(maxTime, outTime + 0.6);
       });
 
-      // Transition background color from #1B17FF to dark navy (#0b192c)
+      // Transition background color from #1B17FF to dark navy (#0b192c) / black
       tl.to(
         sectionRef.current,
         {
@@ -233,7 +240,8 @@ export default function ProblemStatementSection() {
   }, { scope: sectionRef });
 
   return (
-    <section id="problem" ref={sectionRef} className="relative overflow-hidden bg-[#1B17FF] h-screen">
+    <div id="problem">
+      <section ref={sectionRef} className="relative overflow-hidden bg-[#1B17FF] h-screen">
       <div className="absolute inset-0 bg-linear-to-br from-slate-50 via-white to-slate-100 opacity-0" />
       <div className="relative mx-auto flex h-full max-w-5xl items-center justify-center px-6 text-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -309,6 +317,7 @@ export default function ProblemStatementSection() {
           ))}
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }
